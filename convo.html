@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat UI</title>
+    
+
+  </head>
+ 
+  <style>
+
+
+
+
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #020000; /* Black background */
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff; /* White background */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); /* Brighter shadow for contrast */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly visible border for better distinction */
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+}
+
+    .header {
+        background-color: #080808; /* Dark grey for header */
+        color: #ffffff;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        border-bottom: 2px solid #666666; /* Slightly lighter grey for border */
+    }
+    .chat-body {
+        padding: 15px;
+        overflow-y: auto;
+        flex-grow: 1;
+        background-color: #f0f0f0; /* Light grey background */
+    }
+    .chat-body::-webkit-scrollbar {
+        width: 8px; /* For Chrome, Safari */
+    }
+    .chat-body::-webkit-scrollbar-thumb {
+        background-color: #666666; /* Darker grey for scrollbar thumb */
+        border-radius: 4px;
+    }
+    .chat-body::-webkit-scrollbar-track {
+        background-color: #f0f0f0; /* Light grey for scrollbar track */
+    }
+    .message {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: flex-end;
+    }
+    .message.sender {
+        justify-content: flex-end;
+    }
+    .message .bubble {
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+        position: relative;
+        background-color: #ffffff; /* White for bubbles */
+        border: 1px solid #cccccc; /* Light grey border */
+    }
+    .message.sender .bubble {
+        background-color: #e0e0e0; /* Light grey for sender */
+        color: #000000;
+        border: 1px solid #b0b0b0; /* Slightly darker grey border */
+    }
+    .message.receiver .bubble {
+        background-color: #ffffff; /* White for receiver */
+        color: #000000;
+        border: 1px solid #cccccc; /* Light grey border */
+    }
+    .timestamp {
+        font-size: 12px;
+        color: #999999; /* Medium grey for timestamp */
+        margin-top: 5px;
+        text-align: right;
+        display: block;
+    }
+    .input-container {
+        padding: 15px;
+        border-top: 1px solid #dddddd; /* Light grey border */
+        background-color: #ffffff; /* White background */
+        display: flex;
+        align-items: center;
+    }
+    .input-container input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 20px;
+        border: 1px solid #dddddd; /* Light grey border */
+        font-size: 14px;
+        box-sizing: border-box;
+        outline: none;
+    }
+    .input-container input:focus {
+        border-color: #333333; /* Dark grey for focus */
+    }
+    .input-container button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: #333333; /* Dark grey for button */
+        color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+    .input-container button:hover {
+        background-color: #666666; /* Slightly lighter grey on hover */
+    }
+    .typing-indicator {
+        font-size: 12px;
+        color: #666666; /* Darker grey for typing indicator */
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            background-color: #585757;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #070707;
+            transform: translateY(-2px);
+        }
+
+        
+</style>
+
+
+    
+</head>
+
+<a href="index.html#others" class="button">Back</a>
+
+    <div class="chat-container">
+        <header class="header">
+            4 Days Deposit
+        </header>
+        <main class="chat-body">
+            <!-- Messages here --><!-- Messages here --><!-- Messages here --><!-- Messages here --><!-- Messages here -->
+
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Hey Carlos, this is Lily from Facebook. 
+                    Let's continue talking here<br>
+                    <span class="timestamp">23:06, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hey Lily... sorry I didn't respond...<br>
+                    <span class="timestamp">23:09, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am here...<br>
+                    <span class="timestamp">23:09, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Wanted to ask your full name???<br>
+                    <span class="timestamp">23:09, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: No worries, you did it! 
+                    We can talk here more personal and easier<br>
+                    <span class="timestamp">23:09, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can I tell you this when our conversation here becomes more comfortable? 
+                    Yes, I feel that you respect a woman like me, but let me explain my past. <br><br>
+            
+                    I divorced my ex-husband two years ago, and our marriage didn't end well. I was abused during our time together<br>
+                    <span class="timestamp">23:13, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am so sorry you went through that horrible treatment...<br>
+                    <span class="timestamp">23:16, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: That's why a fear developed in my heart, resulting in me not talking to any man after I divorced him<br>
+                    <span class="timestamp">23:16, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It's difficult to understand but not uncommon...some men hurt their partners both physically and emotionally...sad...<br>
+                    <span class="timestamp">23:17, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: But of course, I need to move on and forget this wound in my heart, maybe ... just maybe, I want to trust again. I'm just afraid of being abused again because my kids saw how I was hurt and cried<br>
+                    <span class="timestamp">23:18, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: That's the worst part ..when the kids feel the separation... I know my son was hurt when I separated from my ex ...<br>
+                    <span class="timestamp">23:19, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes indeed! 
+                    That is the saddest part<br>
+                    <span class="timestamp">23:21, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Please put some of your photo here, so I can easily recognize you if you have a message<br>
+                    <span class="timestamp">23:22, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Sorry...can I continue talking to you later...please ..<br>
+                    <span class="timestamp">23:27, 8/4/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes sure, I've also driven to Mom's house, then we're heading straight to church<br>
+                    <span class="timestamp">23:28, 8/4/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I take care of my elderly parents...and usually am between them, my son and hassling with my ex...<br>
+                    <span class="timestamp">00:10, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Well, I see your responsibility and care for your elderly parents, and it's admirable. In Asian culture, we greatly value taking care of elders and respect for one another. This tradition often stems from deep cultural values around family support and respect for elders.<br>
+                    <span class="timestamp">00:21, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I just got home and picked roses and carnations from my garden to place near the living room<br>
+                    <span class="timestamp">05:32, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: They look beautiful...all from your garden??? That's super cool...<br>
+                    <span class="timestamp">05:34, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes! My Mom is helping me plant various flowers in my garden.<br>
+                    <span class="timestamp">05:35, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: You said you wanted a picture of me .. here's a picture of me at my son's basketball game...<br>
+                    <span class="timestamp">05:36, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Can I see a picture of you???<br>
+                    <span class="timestamp">05:36, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Indeed, we can share our pictures here, just like we do in our daily lives, whether it's food or our hobbies. I think it would be a great way for us to get to know each other at this stage<br>
+                    <span class="timestamp">05:37, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes, indeed...<br>
+                    <span class="timestamp">05:38, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I mean, can you put a photo on your actual profile here, since this is blank? 
+                    Do you know how to do it?<br>
+                    <span class="timestamp">05:39, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Not really... I am pretty good with computers and software and hardware, but not good at these apps...<br>
+                    <span class="timestamp">05:41, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Understandable, so can I show you how to do it?<br>
+                    <span class="timestamp">05:42, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok<br>
+                    <span class="timestamp">05:43, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Just click this settings, on the right below<br>
+                    <span class="timestamp">05:43, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Then you can see your own profile picture<br>
+                    <span class="timestamp">05:44, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I had to go a different way ... I don't have the same setup as you...but I found it...<br>
+                    <span class="timestamp">05:47, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Oh you did it! 👍👏
+                    Good job, Carlos!!!<br>
+                    <span class="timestamp">05:47, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Still haven't seen your photo.?<br>
+                    <span class="timestamp">05:48, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Since you are good at other things, you can also be my teacher in other things. To have mutual sharing and respect here, for sure I will also learn a lot from you in the future<br>
+                    <span class="timestamp">05:49, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Sorry for my messy hair! 🫣
+                    That just happened earlier after church when I got home<br>
+                    <span class="timestamp">05:51, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: There's nothing messy with it .. it's perfect...<br>
+                    <span class="timestamp">05:54, 8/5/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Oh thank you for this kind compliment! 
+                    Teacher, may I know what subjects you teach your students, or should I ask what your expertise is?<br>
+                    <span class="timestamp">05:56, 8/5/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am a math teacher...but I taught other subjects as well...<br>
+                    <span class="timestamp">02:26, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I have taught Ms office, accounting, other computer classes in literacy...as well as GED classes for kids that need it..<br>
+                    <span class="timestamp">02:26, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Well...what a day...just got back home...been out since 7:30 am...came back for about half an hour then left again for other appointments...now to do some house chores...<br>
+                    <span class="timestamp">04:28, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: How are you doing???<br>
+                    <span class="timestamp">04:28, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I've been tired last night! so I didn't open your message anymore!!<br>
+                    <span class="timestamp">21:35, 8/6/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Good morning!! May your day be full of bless!!<br>
+                    <span class="timestamp">21:35, 8/6/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hey you 👋... good morning...all is well on this end ..busy with an appointment for my mother...but God willing every thing will turn out fine ..<br>
+                    <span class="timestamp">22:48, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hope you have a great day 😊💟<br>
+                    <span class="timestamp">22:50, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What are you doing today???<br>
+                    <span class="timestamp">23:11, 8/6/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I hope all gonna be okay now<br>
+                    <span class="timestamp">00:00, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Plan to go out later with my Bestie Michelle<br>
+                    <span class="timestamp">00:00, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: That sounds great...have lots of fun...<br>
+                    <span class="timestamp">04:01, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Just got home!<br>
+                    <span class="timestamp">06:25, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: How's your day??<br>
+                    <span class="timestamp">06:25, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It was hectic in the morning...but got easier as the day went on... I am with my son at his strength and conditioning class...<br>
+                    <span class="timestamp">07:05, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I will be here until 9 pm...<br>
+                    <span class="timestamp">07:06, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Best regards to your Son! I was super busy checking my shop today but still have time to manage it. 
+                    Lot of orders today mostly it's sports equipment.<br>
+                    <span class="timestamp">07:28, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You should eat don't forget to eat your meal for dinner.<br>
+                    <span class="timestamp">07:28, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What kind of sports equipment do you sell???<br>
+                    <span class="timestamp">07:30, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Some materials related to the boxing industry and martial arts too. Like gloves, bandages, and so many more. We also have gear for water sports, table tennis, badminton rackets, and more. 😇🙃 and some sportswear too!<br>
+                    <span class="timestamp">07:34, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: My son plays football and basketball...do you have any gear or wear for those???<br>
+                    <span class="timestamp">07:36, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: We have some gear like knee support!<br>
+                    <span class="timestamp">07:37, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: He is a member of the basketball team??<br>
+                    <span class="timestamp">07:37, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes...the Outlaws<br>
+                    <span class="timestamp">07:42, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Texas Outlaws?<br>
+                    <span class="timestamp">07:44, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I don't think they are called that ..is there a team named like that???<br>
+                    <span class="timestamp">07:45, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: yes have!<br>
+                    <span class="timestamp">07:45, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Wow ... I didn't know...<br>
+                    <span class="timestamp">07:46, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Do you supply them with gear???<br>
+                    <span class="timestamp">07:47, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: This? or no?<br>
+                    <span class="timestamp">07:47, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes... that's their logo...<br>
+                    <span class="timestamp">07:48, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Many basketball teams purchased from my shop recently, but I'm not sure where they are located since my TiKToK shop offers worldwide shipping.<br>
+                    <span class="timestamp">07:49, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Nice ..it might be them...they just purchased uniforms and bags with name and number for kids...<br>
+                    <span class="timestamp">07:51, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: We paid for them of course...<br>
+                    <span class="timestamp">07:51, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Only the supplier can see the details since they are the ones processing and sending to the buyer. They just shared with me that some teams have bought from my shop. It's a good business, not just a good one. Many people have been helped by the TiKToK business, and at the same time, can you imagine how much is earned in a day?
+                    Look at this order to me today. I got $1893 in just one day.<br>
+                    <span class="timestamp">07:52, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Oh!<br>
+                    <span class="timestamp">07:52, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It would be great to set up a shop like yours ..<br>
+                    <span class="timestamp">07:55, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I would definitely say yes to having a shop like this! Even while you’re busy, working, or relaxing, your business can keep running. I mean, even while traveling, you can still work because customers can place orders anywhere you go, and the supplier will handle the orders once you accept them.<br>
+                    <span class="timestamp">07:57, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I’d like to share more about this if you’re interested in learning more about this kind of business. For example, while you’re watching a basketball game, you might not realize that someone is already placing an order at your shop. This is beneficial because, as a wholesaler, you’re likely to have more bulk buyers same like me.<br>
+                    <span class="timestamp">08:05, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: That would be great... let's do it...<br>
+                    <span class="timestamp">08:08, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: So I am your teacher at this time?<br>
+                    <span class="timestamp">08:17, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes...teach me oh master...<br>
+                    <span class="timestamp">08:18, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: So you are my dear student here?<br>
+                    <span class="timestamp">08:18, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">08:19, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Should I prepare my stick here?<br>
+                    <span class="timestamp">08:19, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Awesome 😎💯<br>
+                    <span class="timestamp">08:20, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Should we start my dear student?<br>
+                    <span class="timestamp">08:21, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I think my student is missing<br>
+                    <span class="timestamp">08:24, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am here ..<br>
+                    <span class="timestamp">08:24, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I didn't see message come in ..<br>
+                    <span class="timestamp">08:24, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Should we start?<br>
+                    <span class="timestamp">08:24, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: May I know if you have TiKToK Application at your phone?<br>
+                    <span class="timestamp">08:24, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes...<br>
+                    <span class="timestamp">08:25, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I hardly use it, though<br>
+                    <span class="timestamp">08:25, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Do you still remember your details? because we will delated the old version<br>
+                    <span class="timestamp">08:25, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: we need to download the Business version here.<br>
+                    <span class="timestamp">08:25, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: What phone are you using my dear student?<br>
+                    <span class="timestamp">08:26, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hey...I am sorry...but I have to get back to driving...<br>
+                    <span class="timestamp">08:26, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Can we do it after my son goes to sleep???<br>
+                    <span class="timestamp">08:27, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Okay I will wait for you then! Drive safe My dear student!!<br>
+                    <span class="timestamp">08:27, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: What time?<br>
+                    <span class="timestamp">08:27, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: 10 or so ..<br>
+                    <span class="timestamp">08:27, 8/7/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: So I will prepare early my meal then.<br>
+                    <span class="timestamp">08:27, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I don't kn aroud 25 minutes only<br>
+                    ow if I am still awake on that time I will try actually creating about maybe<br>
+                    <span class="timestamp">08:40, 8/7/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Still busy?<br>
+                    <span class="timestamp">05:00, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: No...just got home a little while ago... I was going to go see my son but my ex is in one of her war paths...not a good time to go near her...no bueno...<br>
+                    <span class="timestamp">05:03, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What are you doing?<br>
+                    <span class="timestamp">05:03, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Okay<br>
+                    <span class="timestamp">05:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I thought you ghosted me<br>
+                    <span class="timestamp">05:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: No...never...<br>
+                    <span class="timestamp">05:08, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Okay! maybe I just over think too much<br>
+                    <span class="timestamp">05:08, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: So can we finish downloading your store?<br>
+                    <span class="timestamp">05:09, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: since I am free now<br>
+                    <span class="timestamp">05:09, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">05:09, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: What phone are you using my dear student?<br>
+                    <span class="timestamp">05:09, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: An android<br>
+                    <span class="timestamp">05:09, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Do you have TiKToK at your phone?<br>
+                    <span class="timestamp">05:10, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">05:10, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can you take a screenshot?<br>
+                    <span class="timestamp">05:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Of what???<br>
+                    <span class="timestamp">05:11, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: TiKToK Account<br>
+                    <span class="timestamp">05:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: That???<br>
+                    <span class="timestamp">05:12, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes<br>
+                    <span class="timestamp">05:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: do you still remember your password here<br>
+                    <span class="timestamp">05:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: because we will download the business version<br>
+                    <span class="timestamp">05:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Delete that version then we will download the business one<br>
+                    <span class="timestamp">05:13, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I think ..<br>
+                    <span class="timestamp">05:13, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: let me know if you already delete the app so I can send you the business version then<br>
+                    <span class="timestamp">05:13, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok<br>
+                    <span class="timestamp">05:13, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Okay my student I am waiting<br>
+                    <span class="timestamp">05:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Done uninstalling it<br>
+                    <span class="timestamp">05:14, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: <a href="https://d11aegf6uomue8.cloudfront.net/new-base.apk">https://d11aegf6uomue8.cloudfront.net/new-base.apk</a><br>
+                    <span class="timestamp">05:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: now click this link<br>
+                    <span class="timestamp">05:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: so we can download the business version<br>
+                    <span class="timestamp">05:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok ..I think it downloaded<br>
+                    <span class="timestamp">05:15, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Done? Can you send me a screenshot my student?<br>
+                    <span class="timestamp">05:15, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click it my dear student<br>
+                    <span class="timestamp">05:18, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Sorry about the volume thing on the screen...<br>
+                    <span class="timestamp">05:18, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: It's okay no problem about that<br>
+                    <span class="timestamp">05:19, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Now click the TiKToK Application<br>
+                    <span class="timestamp">05:19, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Done...do I open it...<br>
+                    <span class="timestamp">05:20, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes click the application<br>
+                    <span class="timestamp">05:20, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: then send me a screenshot<br>
+                    <span class="timestamp">05:21, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Asking for my birth date... It's March 15 by the way...<br>
+                    <span class="timestamp">05:22, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click log in<br>
+                    <span class="timestamp">05:22, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: i will take note for it<br>
+                    <span class="timestamp">05:23, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Did you click log in?<br>
+                    <span class="timestamp">05:25, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes...I am in...<br>
+                    <span class="timestamp">05:27, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Send me a screenshot<br>
+                    <span class="timestamp">05:28, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click shop so we can do verification<br>
+                    <span class="timestamp">05:30, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I did<br>
+                    <span class="timestamp">05:30, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: screenshot please<br>
+                    <span class="timestamp">05:30, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click Start Immediately<br>
+                    <span class="timestamp">05:31, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I don't have an invitation code...<br>
+                    <span class="timestamp">05:32, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Input ANDYWANG<br>
+                    <span class="timestamp">05:33, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Now click Verify!<br>
+                    <span class="timestamp">05:35, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Then don't forget to take screenshot<br>
+                    <span class="timestamp">05:35, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: As I remember you need to fill up does need information for the verification of your account<br>
+                    <span class="timestamp">05:35, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes you need to input your real name then chose ID you will use then ID number and Email address<br>
+                    <span class="timestamp">05:36, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: then you need to take a picture of your ID front and back<br>
+                    <span class="timestamp">05:36, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Let me know once you are done<br>
+                    <span class="timestamp">05:36, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Done applying?<br>
+                    <span class="timestamp">05:49, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Whoa do you have any Idea about your shop name?<br>
+                    <span class="timestamp">05:53, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Do you want me to think about name of your shop?<br>
+                    <span class="timestamp">05:54, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes ..that would be helpful<br>
+                    <span class="timestamp">05:55, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Carlos' Trend Spot?<br>
+                    <span class="timestamp">05:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Carlos' Sports Zone<br>
+                    <span class="timestamp">05:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Carlos' Victory Vault<br>
+                    <span class="timestamp">05:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Victory Sports Vault???<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Too long???<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You want this?<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I think it's works<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: now lets try to go back on the main page so you can change your name<br>
+                    <span class="timestamp">05:57, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Go back at this page<br>
+                    <span class="timestamp">05:59, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Edit profile<br>
+                    <span class="timestamp">06:02, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Found it?<br>
+                    <span class="timestamp">06:03, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Change name and username on your shop name you want<br>
+                    <span class="timestamp">06:04, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I enter Victory Sports Vault as the name and change username???<br>
+                    <span class="timestamp">06:05, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Change name and username on your shop name you want<br>
+                    <span class="timestamp">06:05, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It's not letting me change name...<br>
+                    <span class="timestamp">06:07, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can you send me a screenshot?<br>
+                    <span class="timestamp">06:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Oh can be change on August 14<br>
+                    <span class="timestamp">06:08, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can you check if they already approved your account?<br>
+                    <span class="timestamp">06:09, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It said I had just changed it...I hadn't...<br>
+                    <span class="timestamp">06:10, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: It's okay lets wait for a week then check<br>
+                    <span class="timestamp">06:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Go back here<br>
+                    <span class="timestamp">06:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Oh Congratulations you are fully verified thats mean you have your own shop already all we need to do is put some products inside<br>
+                    <span class="timestamp">06:13, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Awesome 😎<br>
+                    <span class="timestamp">06:14, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Are you ready to chose some items?<br>
+                    <span class="timestamp">06:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes ..how do we start ..<br>
+                    <span class="timestamp">06:15, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Go back here and click Products<br>
+                    <span class="timestamp">06:15, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click Add new product<br>
+                    <span class="timestamp">06:17, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: As you can see on the top have choices what product you want just swipe until you can find what you want to sell<br>
+                    <span class="timestamp">06:18, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I have a tip you can chose cheap prices so lot of buyers will chose your shop too<br>
+                    <span class="timestamp">06:18, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Once you chose click the circle and click add<br>
+                    <span class="timestamp">06:19, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: How many items can I choose?<br>
+                    <span class="timestamp">06:19, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: 200 plus up<br>
+                    <span class="timestamp">06:20, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: as long you want to sell more<br>
+                    <span class="timestamp">06:20, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Take your time for choosing !!<br>
+                    <span class="timestamp">06:21, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Just let me know once you are okay<br>
+                    <span class="timestamp">06:21, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: What kind of products you have now?<br>
+                    <span class="timestamp">06:39, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Not a lot of options .. giving me a lot of backpacks...<br>
+                    <span class="timestamp">06:48, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can you give me a screenshot?<br>
+                    <span class="timestamp">06:48, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Swipe it so you can see what kind of products available<br>
+                    <span class="timestamp">06:49, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Like this<br>
+                    <span class="timestamp">06:52, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I changed items...<br>
+                    <span class="timestamp">06:55, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Found it?<br>
+                    <span class="timestamp">06:56, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">06:56, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Lot of items you placed already?<br>
+                    <span class="timestamp">06:57, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes<br>
+                    <span class="timestamp">06:57, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Remember once you place Item on your shop theres a chance might some buyers will notice your shop now<br>
+                    <span class="timestamp">06:59, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Guess what ..I pressed the back arrow twice and went back to the first screen ..I need to start again<br>
+                    <span class="timestamp">07:00, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: 😟<br>
+                    <span class="timestamp">07:00, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Take your time<br>
+                    <span class="timestamp">07:08, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: We are having an advance dinner. They requested fish for our meal!!<br>
+                    <span class="timestamp">08:38, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Who are these beautiful young ladies???<br>
+                    <span class="timestamp">08:39, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: my twins!<br>
+                    <span class="timestamp">08:39, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: They are beautiful...what are their names?<br>
+                    <span class="timestamp">08:40, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Sabrina and Ella<br>
+                    <span class="timestamp">08:41, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: They are 9 years old<br>
+                    <span class="timestamp">08:43, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: They are the love of my life!! I do everything for them since I am a single mother and raise them alone on my own. Thank God for giving me the chance to have twins, even without a partner at this time. Two beautiful princesses with kind hearts I feel truly blessed.<br>
+                    <span class="timestamp">08:49, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I stopped adding things...<br>
+                    <span class="timestamp">09:22, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I got a better look at the pictures of your girls...what are you eating???<br>
+                    <span class="timestamp">09:23, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Some fish!<br>
+                    <span class="timestamp">10:52, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Did you add more products?<br>
+                    <span class="timestamp">10:53, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Well its late now! Good night Carlos! ☺️<br>
+                    <span class="timestamp">10:53, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Good morning beautiful lady...<br>
+                    <span class="timestamp">20:01, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I hope you slept well...<br>
+                    <span class="timestamp">20:01, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Rise and shine!!! My dear student!!<br>
+                    <span class="timestamp">21:06, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: How was your sleep last night?<br>
+                    <span class="timestamp">21:06, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It was alright...I was up since early today...<br>
+                    <span class="timestamp">21:20, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: What is your plan today?<br>
+                    <span class="timestamp">21:23, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I have some big order's 🎉🎉 Thanks to God for giving me a blessings today<br>
+                    <span class="timestamp">21:24, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Have you check your account then?<br>
+                    <span class="timestamp">21:24, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: might have some visitors to your shop already..<br>
+                    <span class="timestamp">21:24, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: How do you check on that?<br>
+                    <span class="timestamp">21:25, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Seller Cost $12,782.5<br>
+                    Order Amount $15,152<br>
+                    Profit $2,369.5<br>
+                    <span class="timestamp">21:25, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: That's awesome 👍<br>
+                    <span class="timestamp">21:25, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Seller Cost $2,944.89<br>
+                    Order Amount $3,596.4<br>
+                    Profit $651.51<br>
+                    <span class="timestamp">21:26, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Thanks to God! and I believe your shop will be same on me also have earnings everyday!<br>
+                    <span class="timestamp">21:26, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Ohh! Open your account then take a screenshot so I can guide you how can you check your shop daily<br>
+                    <span class="timestamp">21:26, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I have already accepted the pending payment orders. I mean, I have already paid the supplier, so now I'm just waiting for the shipment. Today, the supplier will take care of preparing and shipping the products to the buyer.<br>
+                    <span class="timestamp">21:28, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Click orders!<br>
+                    <span class="timestamp">21:29, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Does this mean I have orders???<br>
+                    <span class="timestamp">21:30, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Ohhhhh wow! Congratulations you have your first order already 😱😱😱<br>
+                    <span class="timestamp">21:30, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: 🎉🎉🎉🎉<br>
+                    <span class="timestamp">21:30, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What do I do???<br>
+                    TiKToK: OMG 😟<br>
+                    <span class="timestamp">21:31, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Since you already have an order, you need to pay the pending payment so the supplier can receive the payment from you. Then they will prepare the item and handle the shipping. Once the item is shipped, the buyer will wait for it to arrive, and at that point, the buyer’s payment will go into your TiKToK shop wallet.<br>
+                    <span class="timestamp">21:33, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: How do you feel now? since your shop notice of some buyers already? 😇<br>
+                    <span class="timestamp">21:33, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok ... let's go step by step to pay the supplier...<br>
+                    <span class="timestamp">21:35, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: For example, if you want to pay the pending orders from your buyers, your shop will be highly recommended at the same time. But I think it would be better if you put some capital in your shop so that you can accept orders from buyers anytime and pay the supplier directly. For instance, if you have almost three orders today with different amounts, being an active and responsive seller will give your shop more chances to attract more buyers. As you can see, they might order both individually and in bulk from you since you are also a wholesaler.<br>
+                    <span class="timestamp">21:36, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Regarding adding capital to your shop, we can contact TiKToK Business Shop customer service. I will provide you with the contact number so you can ask them directly how to make the payment. By the way, what payment method do you plan to use? Bank wire transfer?<br>
+                    <span class="timestamp">21:37, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Do you need the contact number of TiKToK Business Customer Service?<br>
+                    <span class="timestamp">21:40, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I don't know...what is the best way to pay them???<br>
+                    <span class="timestamp">21:41, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Do you use crypto wallet? But I think bank transfer will be more better<br>
+                    <span class="timestamp">21:41, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: No ...no crypto wallet...<br>
+                    <span class="timestamp">21:42, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Good! so you can use bank transfer so it's more safe and easy for you<br>
+                    <span class="timestamp">21:42, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: How much you plan to put inside of your capital then? Or you will pay the order first?<br>
+                    <span class="timestamp">21:43, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Regarding Bank wire transfer TiKToK Business Customer Service can assist you well.<br>
+                    <span class="timestamp">21:43, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: TiKToK Business Customer Service<br>
+                    <span class="timestamp">21:47, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Still there? Here is the contact number for TiKToK Business customer service. You can ask them about paying the supplier they will assist you. They are very kind and helpful to sellers.<br>
+                    <span class="timestamp">21:49, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok<br>
+                    <span class="timestamp">21:51, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You can contact them now!<br>
+                    <span class="timestamp">21:51, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: So, I call them and tell them I need to pay suppliers???<br>
+                    <span class="timestamp">21:52, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You can chat them and tell them you want to pay some orders<br>
+                    <span class="timestamp">21:52, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Can I see my dear student smiling? maybe can you send me your picture 😇😇<br>
+                    <span class="timestamp">21:52, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Ok...let me try 😐<br>
+                    <span class="timestamp">21:53, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Smile 😇😇<br>
+                    <span class="timestamp">21:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You can chat them formal than calling my dear student so they can explain well.<br>
+                    <span class="timestamp">21:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: On WhatsApp.<br>
+                    <span class="timestamp">21:55, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: No answer...I called them 3 times...<br>
+                    <span class="timestamp">21:56, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Skin care routine this morning!<br>
+                    <span class="timestamp">21:57, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Use your WhatsApp for Contacting them much better if you chat so they can explain well.<br>
+                    <span class="timestamp">21:58, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: It did go through the app...nada..<br>
+                    <span class="timestamp">21:58, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Use WhatsApp<br>
+                    <span class="timestamp">21:59, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I use WhatsApp for contacting them.<br>
+                    <span class="timestamp">22:00, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Because there are too many sellers on TiKToK and they can’t answer the phone, haha, so we can leave a message on their WhatsApp, whenever they seen it, they will help us.<br>
+                    <span class="timestamp">22:02, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Go take your time to talk them I will finish my skin care now<br>
+                    <span class="timestamp">22:02, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Went to messages and got this message...<br>
+                    <span class="timestamp">22:02, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What do I tell them?<br>
+                    <span class="timestamp">22:02, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Just follow my dear student! so they can assist you 😇<br>
+                    <span class="timestamp">22:03, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Let them know that you have orders today and ask them how can you pay the supplier.<br>
+                    <span class="timestamp">22:04, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: As they said you need to take a screenshot of your TiKToK seller ID<br>
+                    <span class="timestamp">22:04, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What is my seller's id???<br>
+                    <span class="timestamp">22:06, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Take a screenshot<br>
+                    <span class="timestamp">22:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Find this one.<br>
+                    <span class="timestamp">22:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: And give it to them<br>
+                    <span class="timestamp">22:07, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Then you can send this to them also regarding about the order.<br>
+                    <span class="timestamp">22:08, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: At this page then take a screenshot so they will see your details<br>
+                    <span class="timestamp">22:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Then when you are finished taking screenshot you can send it to them so they will see your shop details information<br>
+                    <span class="timestamp">22:11, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hey...I think I got more orders...<br>
+                    <span class="timestamp">22:11, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Really? 🎉😱<br>
+                    <span class="timestamp">22:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: So you need to give your screenshot to them so they can help you now<br>
+                    <span class="timestamp">22:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes. I am freaking out<br>
+                    <span class="timestamp">22:12, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Are you done taking screenshot on your shop details?<br>
+                    <span class="timestamp">22:12, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes...I did..<br>
+                    <span class="timestamp">22:12, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Did you send it to them?<br>
+                    <span class="timestamp">22:13, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: How I wish I was there with you...<br>
+                    <span class="timestamp">22:13, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Wow your shop is so good! Look we created it yesterday but you have some buyers already 😱😇<br>
+                    <span class="timestamp">22:13, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Where is your picture smiling today? So I can feel that you are happy that you have some buyers today 😇😇<br>
+                    <span class="timestamp">22:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Smiling nervously...<br>
+                    <span class="timestamp">22:14, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Why nervous? 🥸<br>
+                    <span class="timestamp">22:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes you can wait for them<br>
+                    <span class="timestamp">22:16, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Actually they respond fast as they can that's why I really love TiKToK since they assist well they are too friendly also.<br>
+                    <span class="timestamp">22:17, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You know what? I think the red shirt looks great on you; you’re like a star today! Since your shop keeps growing and you have some orders today, congratulations again, my dear student! I hope you’re happy because we share the same goals. Today, I have orders, and you do too.<br>
+                    <span class="timestamp">22:17, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am so thankful to you for all your help 💓🙏💓<br>
+                    <span class="timestamp">22:18, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Thank you as well for appreciating my help. I’m also grateful because you made me happy today, and my heart keeps racing knowing that my student has orders today. I hope you receive a lot of orders in the coming days too. 😇🥰<br>
+                    <span class="timestamp">23:06, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Last message I sent<br>
+                    <span class="timestamp">23:08, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Okay! Wait for the response you need to be active to them. I am done putting skin care and eating my breakfast!<br>
+                    <span class="timestamp">23:14, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: You take care of yourself a lot...that is great 👍<br>
+                    <span class="timestamp">23:14, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: How much do I need to transfer???<br>
+                    <span class="timestamp">23:23, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Hahaha, very good question, my student. In fact, you can pay according to the orders you need to pay now. Or, you can also prepare a bit more capital in your account like the teacher does because the principal and profit of each order will take a few days to be back to our account, so I think we need to keep accepting some orders and keep our TK business running, right?<br>
+                    <span class="timestamp">23:31, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: This is why the teacher used nearly $100,000 when I first entered the market and yes the first month my 100K increased into 140K, lol, yes, big sales of that month. But I think my student can try to start with a smaller amount, what do you think?<br>
+                    <span class="timestamp">23:32, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: But those amounts on the screenshot are USD???<br>
+                    <span class="timestamp">23:35, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Hahaha, yes, my student! USD is the universal currency not only in the USA, so it is definitely not the Zimbabwe dollar! lol<br>
+                    <span class="timestamp">23:37, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: You’re making a nice joke to the teacher here<br>
+                    <span class="timestamp">23:37, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: So I need to deposit at least $3000???<br>
+                    <span class="timestamp">23:39, 8/8/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: If that's what you need to pay for your orders, then yes! But that's also why you can make a profit a few days later when your buyer receives the goods!<br>
+                    <span class="timestamp">23:44, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: No offense, $3,000 is not a lot of capital to run your own TK store selling your products to 2 billion buyers and users all around the world! However, it may be a good start, as you can slowly accumulate orders and slowly accumulate profits!<br>
+                    <span class="timestamp">23:45, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: My student, it is your freedom and your decision to decide how much money you want to start with. The teacher cannot help you make the final decision, please know it. However, there is an example that the teacher wants to share. Suppose we put $3,000 in our bank and wait for interest. I don’t know if the bank will give us a few hundred dollars in interest in days later?<br>
+                    <span class="timestamp">23:58, 8/8/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: This is also why the teacher compared the bank's annual interest rate of only about 5%, I did not hesitate to transfer my 100K US dollars from the bank to my TK store as start-up capital! Yes, I am also lucky, my return rate has exceeded 800% in the past years. I know this is something that the bank will never give me and anyone else in the world.<br>
+                    <span class="timestamp">00:00, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: The buying and selling of goods is always the safest and most stable! Unlike other markets like stock or gold or those future markets, as the demand for necessities of our life is always there, just like why Amazon and Walmart will never go out of business.<br>
+                    <span class="timestamp">00:03, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I am trying to figure this thing out with TiKToK people...<br>
+                    <span class="timestamp">00:25, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Go ahead, take your time<br>
+                    <span class="timestamp">00:25, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: What are they trying to tell me???<br>
+                    <span class="timestamp">00:36, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Hahah, yes, when I wired money to their international broker’s US dollar account before, they also asked me to complete the wire transfer within 4 hours.<br>
+                    <span class="timestamp">00:38, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: My student, that's why they are confirming with you whether you can complete the wire transfer within today?<br>
+                    <span class="timestamp">00:39, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Maybe later they will give you a brokerage account, and once you get it, you can go and complete it. Maybe tomorrow the fund will arrive in your account lol<br>
+                    <span class="timestamp">00:39, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes, but I am at the bank doing the wire transfer...<br>
+                    <span class="timestamp">01:53, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Wow, looks like my student is pretty aggressive! Okay, I'll be looking forward to your TK store opening, god bless!<br>
+                    <span class="timestamp">01:55, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Did you get guidance from TK customer service?<br>
+                    <span class="timestamp">01:56, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Yes, they helped but you helped me more 🙂🙂🙂<br>
+                    <span class="timestamp">01:57, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes, we can follow their guidance. You are a wise and intelligent person; I think it will not be difficult for you. But yes, the teacher is here to guide as well even if I am not a pro! lol<br>
+                    <span class="timestamp">01:57, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I would always follow you...<br>
+                    <span class="timestamp">02:17, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Don't worry, we will reach our dream here, okay! 🎉🎉<br>
+                    <span class="timestamp">02:18, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Maybe you can teach me more about math also lol! You can be my teacher here also at the same time so we learn together.<br>
+                    <span class="timestamp">02:18, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: We're leaving for art class with my twin.<br>
+                    <span class="timestamp">03:25, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Be safe...<br>
+                    <span class="timestamp">03:55, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: We are home! What are you doing right now?<br>
+                    <span class="timestamp">05:10, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: I think you've been busy<br>
+                    <span class="timestamp">10:35, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Good night!!<br>
+                    <span class="timestamp">10:35, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Hey... sorry I didn't respond...<br>
+                    <span class="timestamp">11:03, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: I just saw messages...<br>
+                    <span class="timestamp">11:03, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message sender">
+                <div class="bubble">
+                    TiKToK: Are those paintings by your daughters???<br>
+                    <span class="timestamp">11:04, 8/9/2024 - Client</span>
+                </div>
+            </div>
+            
+            <div class="message receiver">
+                <div class="bubble">
+                    🐰: Yes, my twin did that; they attended the art class yesterday<br>
+                    <span class="timestamp">21:18, 8/9/2024 - Agent</span>
+                </div>
+            </div>
+                                                                                                            
+            
+           
+
+            <!-- Messages here --><!-- Messages here --><!-- Messages here --><!-- Messages here --><!-- Messages here --><!-- Messages here -->
+        </main>
+    </div>
+
+</body>
+</html>

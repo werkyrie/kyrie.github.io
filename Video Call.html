@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Video Call Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #fe2c55;
+            --secondary-color: #25f4ee;
+            --text-color: #ffffff;
+            --background-color: #010101;
+            --card-background: #1a1a1a;
+            --input-background: #2a2a2a;
+            --input-border: #3a3a3a;
+            --hover-color: #fe2c55;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card-background);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .form-section {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.1);
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--input-background);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 244, 238, 0.1);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        button:hover::before {
+            transform: scaleX(1);
+        }
+
+        button:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.3);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the element */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            background-color: #585757;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #070707;
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container"><a href="index.html#others" class="button">Back</a>
+        <h2>Video Call Template</h2>
+        
+        <form id="registrationForm">
+            <div class="form-section">
+                
+                <div class="form-group">
+                    <label for="purpose">Purpose of Call</label>
+                    <input type="text" id="purpose" required>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Your Full Name and Age</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Your Location and how many years?</label>
+                    <input type="text" id="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="previousLocation">Your Location before you moved to current location?</label>
+                    <input type="text" id="previousLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="work">What's your Work?</label>
+                    <input type="text" id="work" required>
+                </div>
+            
+
+
+            <div class="form-group">
+                <label for="divorce">How many years have you been divorced? What year? </label>
+                <input type="text" id="divorce" required>
+            </div>
+       
+
+
+        <div class="form-group">
+            <label for="pet">Whats your Pet/ Name/ How old?</label>
+            <input type="text" id="pet" required>
+        </div>
+ 
+
+    <div class="form-group">
+        <label for="kids">Kid Name/Age/School/Grade (Just put NA if yo don't have kids)</label>
+        <input type="text" id="kids" required>
+    </div>
+
+
+
+<div class="form-group">
+    <label for="weather">Weather & Time </label>
+    <input type="text" id="weather" required>
+</div>
+
+
+
+
+<div class="form-group">
+    <label for="parents">Parents Details: <br>(Complete the details, so the model can know who's still alive) </label>
+    <input type="text" id="parents" required>
+</div>
+
+
+<div class="form-group">
+    <label for="plans">Your plans for this week end?</label>
+    <input type="text" id="plans" required>
+</div>
+
+
+<div class="form-group">
+    <label for="ethnicity">Whats your Ethnicity (ex: Filipina Taiwanese) </label>
+    <input type="text" id="ethnicity" required>
+</div>
+
+
+<div class="form-group">
+    <label for="car">Whats your Car?(Just put NA if not available)</label>
+    <input type="text" id="car" required>
+</div>
+</div>
+
+            <div class="form-section">
+                <h3>Client Details</h3>
+                <div class="form-group">
+                    <label for="clientName">Client Full Name and Age</label>
+                    <input type="text" id="clientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientLocation">Client Location</label>
+                    <input type="text" id="clientLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientWork">Client Work</label>
+                    <input type="text" id="clientWork" required>
+                </div>
+                <div class="form-group">
+                    <label for="hobbies">Client Hobbies</label>
+                    <input type="text" id="hobbies" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientkid">Kids Name/Qty</label>
+                    <input type="text" id="clientkid" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientnickname">Client's Nickname (Just put NA if not available)</label>
+                    <input type="text" id="clientnickname" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientweekend">Client Plans this Week end?(Just put NA if not available)</label>
+                    <input type="text" id="clientweekend" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientweather">Weather and Time(Just put NA if not available)</label>
+                    <input type="text" id="clientweather" required>
+                </div>
+
+                
+
+            </div>
+
+            <div class="form-section">
+                <h3>Topics to Discuss</h3>
+                <div class="form-group">
+                    <label for="beforeCall">What are you doing before the call?</label>
+                    <input type="text" id="beforeCall" required>
+                </div>
+                <div class="form-group">
+                    <label for="afterCall">What will you do after the call?</label>
+                    <input type="text" id="afterCall" required>
+                </div>
+                <div class="form-group">
+                    <label for="kidLocation">Where is your Kid right now?</label>
+                    <input type="text" id="kidLocation" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>What did you want to discuss with your Client?</h3>
+                <div class="form-group">
+                    <label for="remarks">Questions/Topics/Remarks</label>
+                    <textarea id="remarks" rows="4"></textarea>
+                </div>
+            </div>
+
+            <button type="button" onclick="generatePDF()">Submit</button>
+        </form>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        function generatePDF() {
+            const doc = new jsPDF();
+            let yPosition = 20;
+
+            // Set black background
+            doc.setFillColor(0, 0, 0);
+            doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+
+            // Color scheme
+            const accentColor1 = [37, 244, 238];  // Cyan
+            const accentColor2 = [254, 44, 85];   // Red
+
+            // Add design elements
+            addDesignElements(doc);
+
+            // Title
+            doc.setFontSize(30);
+            doc.setTextColor(255, 255, 255);
+            doc.text("Video Call Form", 105, yPosition, null, null, 'center');
+            yPosition += 20;
+
+            doc.setFontSize(20);
+            doc.setTextColor(...accentColor1);
+            doc.text("Template", 105, yPosition, null, null, 'center');
+            yPosition += 15;
+
+            // Divider
+            doc.setDrawColor(...accentColor2);
+            doc.setLineWidth(1);
+            doc.line(10, yPosition, 200, yPosition);
+            yPosition += 15;
+
+            const inputs = [
+                { label: 'Purpose of Call:', value: document.getElementById('purpose').value },
+                { label: 'Full Name / Age:', value: document.getElementById('fullName').value },
+                { label: 'Location:', value: document.getElementById('location').value },
+                { label: 'Previous Location:', value: document.getElementById('previousLocation').value },
+                { label: 'Whats Your Work?:', value: document.getElementById('work').value },
+                { label: 'Divorce Year:', value: document.getElementById('divorce').value },
+                { label: 'Pet Details:', value: document.getElementById('pet').value },
+                { label: 'Kid Details:', value: document.getElementById('kids').value },
+                { label: 'Weather and Time:', value: document.getElementById('weather').value },
+                { label: 'Parent Details:', value: document.getElementById('parents').value },
+                { label: 'Your Plans this Weekend:', value: document.getElementById('plans').value },
+                { label: 'Whats your ethnicity:', value: document.getElementById('ethnicity').value },
+                { label: 'Whats your car?:', value: document.getElementById('car').value },
+                { label: 'Client Name / Age:', value: document.getElementById('clientName').value },
+                { label: 'Client Location:', value: document.getElementById('clientLocation').value },
+                { label: 'Client Work:', value: document.getElementById('clientWork').value },
+                { label: 'Kids Name/Qty:', value: document.getElementById('clientkid').value },
+                { label: 'Client Nickname:', value: document.getElementById('clientnickname').value },
+                { label: 'Whats his plan this week end?:', value: document.getElementById('clientweekend').value },
+                { label: 'Weather and time?:', value: document.getElementById('clientweather').value },
+                { label: 'What do you do before the call?:', value: document.getElementById('beforeCall').value },
+                { label: 'AWhat will you do after the call?:', value: document.getElementById('afterCall').value },
+                { label: 'Where is your kid right now?:', value: document.getElementById('kidLocation').value },
+                { label: 'What do you want to discussed with your client?:', value: document.getElementById('remarks').value },
+            ];
+
+            inputs.forEach((input, index) => {
+                doc.setFontSize(14);
+                doc.setTextColor(...accentColor1);
+                doc.text(input.label, 20, yPosition);
+                yPosition += 7;
+
+                doc.setFontSize(12);
+                doc.setTextColor(255, 255, 255);
+                doc.text(input.value, 25, yPosition, { maxWidth: 170 });
+                yPosition += 10;
+
+                if (yPosition > 280) {
+                    doc.addPage();
+                    doc.setFillColor(0, 0, 0);
+                    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+                    addDesignElements(doc);
+                    yPosition = 20;
+                }
+            });
+
+            doc.save('video_call_form.pdf');
+        }
+
+        function addDesignElements(doc) {
+            const accentColor1 = [37, 244, 238];  // Cyan
+            const accentColor2 = [254, 44, 85];   // Red
+
+            // Add decorative elements
+            doc.setDrawColor(...accentColor1);
+            doc.setLineWidth(2);
+            doc.line(0, 10, 30, 10);
+            doc.line(0, 287, 30, 287);
+
+            doc.setDrawColor(...accentColor2);
+            doc.line(185, 10, 210, 10);
+            doc.line(185, 287, 210, 287);
+        }
+    </script>
+
+</body>
+</html>
+

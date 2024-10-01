@@ -1,0 +1,291 @@
+/* General Font Styling */
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Sidebar Styling */
+.w3-sidebar {
+    width: 130px; /* Adjust if necessary */
+    background: #222;
+    position: fixed; /* Fixed on the side */
+    top: 0;
+    bottom: 0;
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Main Content Area */
+#main {
+    margin-left: 130px; /* Should match the width of the sidebar */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 600px) {
+    #main {
+        margin-left: 0; /* Full width on smaller screens */
+    }
+}
+
+/* Image Hover Effect */
+.image-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-hover:hover {
+    transform: scale(1.1);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Highlight Styling */
+.highlight {
+    background-color: white; /* Highlight background color */
+    color: black;            /* Text color for the highlighted part */
+    font-weight: bold;       /* Optional: make highlighted text bold */
+}
+
+/* Hidden Elements */
+.hidden {
+    display: none;
+}
+
+/* Search Popup Styling */
+.search-popup {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1); /* Glass effect background */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+    border-radius: 12px; /* More rounded corners for a modern look */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border color for glass effect */
+    transition: box-shadow 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.search-popup:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: scale(1.02); /* Slightly larger on hover */
+}
+
+/* Search Input Field */
+.search-popup input[type="text"] {
+    width: calc(100% - 22px); /* Adjusted for padding and border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border color */
+    border-radius: 8px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
+    color: white;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+.search-popup input[type="text"]:focus {
+    border-color: #0d0d0e; /* Blue border on focus */
+    box-shadow: 0 0 4px rgba(13, 13, 14, 0.5); /* Light blue shadow on focus */
+}
+
+/* Close Button in Search Popup */
+.search-popup .close-btn {
+    background-color: rgba(5, 5, 5, 0.7); /* Slightly transparent dark background */
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Larger text */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.search-popup .close-btn:hover {
+    background-color: rgba(5, 5, 5, 0.9); /* Darker background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for hover effect */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Image Container */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Fullscreen Button */
+.fullscreen-btn {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    z-index: 10;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.fullscreen-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* BANNER AND SLIDES */
+.banner {
+    position: relative;
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 800px; /* Restricting the maximum height */
+}
+.slides {
+    display: flex;
+    transition: transform 1s ease;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 10px;
+    display: block;
+    transition: transform 10s ease;
+    transform: scale(1.2);
+}
+
+.slide .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active img {
+    transform: scale(1);
+}
+
+.slide.active .overlay {
+    opacity: 1;
+}
+
+.slide .text {
+    position: absolute;
+    z-index: 2;
+    bottom: 20%;
+    left: 10%;
+    color: white;
+    font-size: 36px;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.slide.active .text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.prev, .next {
+    pointer-events: all;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.indicator {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    width: 80px;
+    height: 45px;
+    margin: 0 5px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.thumbnail.active {
+    opacity: 1;
+}
+/* end */
+
+
+footer a:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+}
